@@ -1,5 +1,10 @@
 import React from 'react';
+import { NavLink } from 'react-router';
+const links = <>
+    <NavLink to="/" className="hover:bg-pink-300 hover:text-white py-2 rounded-lg px-3 duration-[1s]">Home</NavLink>
+    <NavLink to="/login" className="hover:bg-pink-300 hover:text-white py-2 rounded-lg px-3 duration-[1s]">Log in</NavLink>
 
+</>
 const Navbar = () => {
     return (
         <div>
@@ -12,39 +17,31 @@ const Navbar = () => {
                         <ul
                             tabIndex="-1"
                             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
-                            <li><a>Item 1</a></li>
-                            <li>
-                                <a>Parent</a>
-                                <ul className="p-2">
-                                    <li><a>Submenu 1</a></li>
-                                    <li><a>Submenu 2</a></li>
-                                </ul>
-                            </li>
-                            <li><a>Item 3</a></li>
+                            {
+                                links
+                            }
                         </ul>
                     </div>
-                    <a className="btn btn-ghost text-xl">daisyUI</a>
+                    <a className="btn btn-ghost text-xl" href='/'>Toy-Story</a>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">
-                        <li><a>Item 1</a></li>
-                        <li>
-                            <details>
-                                <summary>Parent</summary>
-                                <ul className="p-2">
-                                    <li><a>Submenu 1</a></li>
-                                    <li><a>Submenu 2</a></li>
-                                </ul>
-                            </details>
-                        </li>
-                        <li><a>Item 3</a></li>
+                        <div className='flex gap-10 merriweather text-xl font-bold'>
+                            {
+                                links
+                            }
+                        </div>
                     </ul>
+
+
+
+
                 </div>
                 <div className="navbar-end">
-                    <a className="btn">Button</a>
+                    <NavLink to="/registration" className="btn bg-green-500 text-white">SignUp</NavLink>
                 </div>
             </div>
-        </div>
+        </div >
     );
 };
 

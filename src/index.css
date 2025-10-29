@@ -1,2 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&display=swap');
+
 @import "tailwindcss";
 @plugin "daisyui";
+
+.lobster {
+    font-family: "Lobster Two", sans-serif;
+}
+
+.merriweather {
+    font-family: "Merriweather", serif;
+}
+
+a.active {
+    text-decoration: underline;
+    color: Blue;
+}
