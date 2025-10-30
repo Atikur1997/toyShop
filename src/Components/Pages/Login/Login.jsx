@@ -20,27 +20,27 @@ const Login = () => {
             })
             .catch((error) => {
                 console.log(error.code);
+                let message = "";
+
                 if (
                     error.code === "auth/user-not-found" ||
                     error.code === "auth/wrong-password"
                 ) {
-                    setErrorMsg("Invalid email or password. Please try again.");
-                    return toast(`❌❌❌${errorMsg}❌❌❌`,)
+                    message = "Invalid email or password. Please try again.";
                 } else if (error.code === "auth/invalid-email") {
-                    setErrorMsg("Please enter a valid email address.");
-                    return toast(`❌❌❌${errorMsg}❌❌❌`)
+                    message = "Please enter a valid email address.";
                 } else if (error.code === "auth/too-many-requests") {
-                    setErrorMsg("Too many unsuccessful login attempts. Please try again later.");
-                    return toast(`❌❌❌${errorMsg}❌❌❌`);
+                    message = "Too many unsuccessful login attempts. Please try again later.";
                 } else if (error.code === "auth/invalid-credential") {
-                    setErrorMsg("The provided credential is not Registered Please Register First!.");
-                    return toast(`❌❌❌${errorMsg}❌❌❌`);
+                    message = "The provided credential is not registered. Please register first!";
+                } else {
+                    message = "Something went wrong. Please try again later.";
                 }
-                else {
-                    setErrorMsg("Something went wrong. Please try again later.");
-                    return toast(`❌❌❌${errorMsg}❌❌❌`);
-                }
+
+                setErrorMsg(message);
+                toast.error(`❌ ${message} ❌`, { position: "top-center" });
             });
+
 
 
     }
