@@ -1,14 +1,56 @@
-import React from 'react';
-import { NavLink } from 'react-router';
+import React, { use, useState } from 'react';
+import { NavLink, useNavigate } from 'react-router';
+import { AuthContext } from '../../../Provider/AuthProvider';
+import { toast, ToastContainer } from 'react-toastify';
 
 const Login = () => {
+    const { LogIn } = use(AuthContext);
+
+    const navigation = useNavigate();
+    const [errorMsg, setErrorMsg] = useState("")
+    const handleLogin = (event) => {
+        event.preventDefault();
+        const form = event.target;
+        const email = form.email.value;
+        const password = form.password.value;
+        setErrorMsg("");
+        LogIn(email, password)
+            .then((result) => {
+                navigation('/');
+            })
+            .catch((error) => {
+                console.log(error.code);
+                if (
+                    error.code === "auth/user-not-found" ||
+                    error.code === "auth/wrong-password"
+                ) {
+                    setErrorMsg("Invalid email or password. Please try again.");
+                    return toast(`❌❌❌${errorMsg}❌❌❌`,)
+                } else if (error.code === "auth/invalid-email") {
+                    setErrorMsg("Please enter a valid email address.");
+                    return toast(`❌❌❌${errorMsg}❌❌❌`)
+                } else if (error.code === "auth/too-many-requests") {
+                    setErrorMsg("Too many unsuccessful login attempts. Please try again later.");
+                    return toast(`❌❌❌${errorMsg}❌❌❌`);
+                } else if (error.code === "auth/invalid-credential") {
+                    setErrorMsg("The provided credential is not Registered Please Register First!.");
+                    return toast(`❌❌❌${errorMsg}❌❌❌`);
+                }
+                else {
+                    setErrorMsg("Something went wrong. Please try again later.");
+                    return toast(`❌❌❌${errorMsg}❌❌❌`);
+                }
+            });
+
+
+    }
     return (
         <div>
             <div className='py-20'>
                 <h1 className='lobster text-5xl text-center'>Sign In Now!</h1>
                 <p className='text-gray-500 text-center text-2xl py-3'>Explore the World of imagination</p>
                 <div className=' text-center'>
-                    <form>
+                    <form onSubmit={handleLogin}>
                         <div className="card-body max-w-[500px] mx-auto merriweather shadow-lg shadow-green-400 ">
 
 
@@ -16,7 +58,7 @@ const Login = () => {
                             <input type="email" className="input w-full" placeholder="Email" name='email' />
                             <label className="label">Password</label>
                             <input type="password" className="input w-full" placeholder="Password" name='password' />
-                            <div className='flex justify-between pt-4'>
+                            <div className='flex flex-col md:flex-row items-center justify-between pt-4'>
                                 <div><a className="link link-hover">Forgot password?</a></div>
                                 <div>
                                     <p>Don't have an account? <NavLink to="/registration" className="underline text-blue-800">Register Now !</NavLink></p>
@@ -32,6 +74,7 @@ const Login = () => {
                     </form>
                 </div>
             </div>
+            <ToastContainer position='top-center' autoClose={2000} closeOnClick={true} ></ToastContainer>
         </div>
     );
 };
