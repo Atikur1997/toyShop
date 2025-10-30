@@ -5,7 +5,7 @@ const Login = () => {
     return (
         <div>
             <div className='py-20'>
-                <h1 className='lobster text-5xl text-center'>Sign Up Now!</h1>
+                <h1 className='lobster text-5xl text-center'>Sign In Now!</h1>
                 <p className='text-gray-500 text-center text-2xl py-3'>Explore the World of imagination</p>
                 <div className=' text-center'>
                     <form>

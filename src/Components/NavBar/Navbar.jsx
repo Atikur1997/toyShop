@@ -1,11 +1,29 @@
-import React from 'react';
+import React, { use } from 'react';
 import { NavLink } from 'react-router';
+import { AuthContext } from '../../Provider/AuthProvider';
+import { CgProfile } from "react-icons/cg";
+import { signOut } from 'firebase/auth';
+
 const links = <>
     <NavLink to="/" className="hover:bg-pink-300 hover:text-white py-2 rounded-lg px-3 duration-[1s]">Home</NavLink>
-    <NavLink to="/login" className="hover:bg-pink-300 hover:text-white py-2 rounded-lg px-3 duration-[1s]">Log in</NavLink>
+    <NavLink to="/registration" className="hover:bg-pink-300 hover:text-white py-2 rounded-lg px-3 duration-[1s]">Sign Up</NavLink>
 
 </>
 const Navbar = () => {
+
+    const { user, logout } = use(AuthContext)
+
+    const handleLogout = () => {
+        logout()
+            .then(() => {
+                
+             })
+            .catch((error) => {
+                console.log(error.message);
+            });
+
+    }
+
     return (
         <div>
             <div className="navbar bg-base-100 shadow-sm">
@@ -37,8 +55,27 @@ const Navbar = () => {
 
 
                 </div>
-                <div className="navbar-end">
-                    <NavLink to="/registration" className="btn bg-green-500 text-white">SignUp</NavLink>
+                <div className="navbar-end px-4">
+                    {user ? (
+
+                        <div className="flex items-center gap-4 tooltip">
+                            <span className="text-lg font-medium flex items-center gap-5 merriweather tooltip tooltip-bottom" data-tip={`welcome  ${user.displayName || user.email}!`}>
+                                {user.photoURL ? <img className='w-10 h-10 rounded-full mr-2' src={user.photoURL} alt="User Profile" /> : <CgProfile className='w-[50px] h-[40px]' />}
+
+                            </span>
+                            <button
+                                onClick={handleLogout}
+                                className="btn bg-red-500 text-white hover:bg-red-600"
+                            >
+                                Logout
+                            </button>
+                        </div>
+                    ) : (
+
+                        <NavLink to="/login" className="btn bg-green-500 text-white">
+                            Login
+                        </NavLink>
+                    )}
                 </div>
             </div>
         </div >
