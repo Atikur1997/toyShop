@@ -1,8 +1,8 @@
 import React, { use } from 'react';
-import { NavLink } from 'react-router';
+import { NavLink, useNavigate } from 'react-router';
 import { AuthContext } from '../../Provider/AuthProvider';
 import { CgProfile } from "react-icons/cg";
-import { signOut } from 'firebase/auth';
+
 
 const links = <>
     <NavLink to="/" className="hover:bg-pink-300 hover:text-white py-2 rounded-lg px-3 duration-[1s]">Home</NavLink>
@@ -12,12 +12,12 @@ const links = <>
 const Navbar = () => {
 
     const { user, logout } = use(AuthContext)
-
+    const nagigation = useNavigate()
     const handleLogout = () => {
         logout()
             .then(() => {
-                
-             })
+                nagigation('/login');
+            })
             .catch((error) => {
                 console.log(error.message);
             });
