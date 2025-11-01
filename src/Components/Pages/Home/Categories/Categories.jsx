@@ -7,7 +7,7 @@ const Categories = ({ toy }) => {
     const { toyName, pictureURL, rating, availableQuantity, price, toyId } = toy;
 
     return (
-        <div>
+        <div data-aos="fade-down-left" data-aos-duration="1000">
             <div className="card bg-base-100 w-96 shadow-sm">
                 <figure>
                     <img className='w-[300px] h-[300px] rounded-md shadow-2xl mt-3'
