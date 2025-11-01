@@ -27,7 +27,7 @@ const Categories = ({ toy }) => {
                         </div>
                     </div>
                     <div className="card-actions justify-end">
-                        <p className='py-2 lobster font-semibold text-red-700 text-lg'>Price: ${price}</p>
+                        <p className='py-2 lobster font-semibold  text-red-700 text-2xl animate-bounce'>Price: ${price}</p>
                         <Link to={`/toyDetails/${toyId}`} className="btn btn-primary">View More...</Link>
 
                     </div>
