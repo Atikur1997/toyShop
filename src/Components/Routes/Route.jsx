@@ -7,6 +7,7 @@ import Registration from "../Registration/Registration";
 import Home from "../Pages/Home/Home";
 import ToyDetails from "../Pages/ToyDetails/ToyDetails";
 import PrivateRoute from "../../Provider/PrivateRoute";
+import Loading from "../Pages/Loading/Loading";
 
 
 export const router = createBrowserRouter([
@@ -17,7 +18,8 @@ export const router = createBrowserRouter([
         children: [
             {
                 index: true,
-                Component: Home
+                Component: Home,
+                hydrateFallbackElement: <Loading></Loading>
             },
             {
                 path: "/login",
@@ -33,6 +35,7 @@ export const router = createBrowserRouter([
                 element: (<PrivateRoute>
                     <ToyDetails></ToyDetails>
                 </PrivateRoute>),
+                hydrateFallbackElement: <Loading></Loading>
             }
         ]
     }
