@@ -123,7 +123,7 @@ npm run dev
 ## 🔗Live Link 
 
 Live Server is here 
- [![Live Demo](https://img.shields.io/badge/Live-Demo-green)](https://toy-toy.netlify.app/)
+ [![Live Demo](https://img.shields.io/badge/Live-Demo-green)](https://fancy-pasca-11ad68.netlify.app/)
 ## 📫 Contact
 
 **A.K.M. Atikur Rahman**  
